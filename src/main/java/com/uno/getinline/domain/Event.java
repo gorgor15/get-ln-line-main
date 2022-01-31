@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 public class Event {
     private Long id;
     private Long placeID;
+    private Place place;
     private String eventName;
 
     private EventStatus eventStatus;
