@@ -4,6 +4,7 @@ package com.uno.getinline.controller.Api;
 import com.uno.getinline.constant.PlaceType;
 import com.uno.getinline.dto.APIDataResponse;
 import com.uno.getinline.dto.PlaceDTO;
+import com.uno.getinline.dto.PlaceResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,20 +14,22 @@ import java.util.List;
 public class APIPlaceController {
 
     @GetMapping("/places")
-    public APIDataResponse<List<PlaceDTO>> getPlaces(){
-        return APIDataResponse.of(List.of(PlaceDTO.of(
+    public APIDataResponse<List<PlaceResponse>> getPlaces(){
+        return APIDataResponse.of(List.of(PlaceResponse.of(
                 PlaceType.COMMON,
                 "랄라배드민턴장",
                 "경기도 부천시",
                 "010-1234-4567",
-                30,
-                "신장 개업"
+                "신장 개업",
+                30
         )));
     }
-    @PostMapping("/places")
-    public Boolean createPlace(){
-        return true;
-    }
+
+//    @ResponseStatus(HttpStatus.CREATED)
+//    @PostMapping("/places")
+//    public APIDataResponse<void> createPlace(@RequestBody PlaceRequest placeRequest){
+//        return APIDataResponse.empty();
+//    }
 
     @GetMapping("/places/{placeId}")
     public APIDataResponse<PlaceDTO> getPlace(@PathVariable Integer placeId){

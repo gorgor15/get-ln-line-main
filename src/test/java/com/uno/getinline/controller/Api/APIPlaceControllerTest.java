@@ -21,14 +21,15 @@ class APIPlaceControllerTest {
         this.mvc = mvc;
     }
 
-    @DisplayName("[API][GET] 장소 리스트 조회")
+    @DisplayName("[API][GET] 장소 리스트 조회 - 장소 리스트 데이터를 담은 표준 API 출력")
     @Test
-    void givenNothing_whenRequestPlaces_thenReturnsListOfPlacesInStandardResponse() throws Exception{
+    void givenNothing_whenRequestPlace_thenReturnsListOfPlaceInStandardResponse() throws Exception{
+        //given (Arrange): 상태(state)의 정의 - 테스트를 수행할 때 전제 조건
 
-        //when & then
+        //when (Act): 동작 - 테스트 실행 & then (Assert): 검증 - 동작의 결과(actual) vs. 예상값(expected)
         mvc.perform(get("/api/places"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.data").isArray())
                 .andExpect(jsonPath("$.data[0].placeType").value(PlaceType.COMMON.name()))
                 .andExpect(jsonPath("$.data[0].placeName").value("랄라배드민턴장"))
@@ -39,6 +40,7 @@ class APIPlaceControllerTest {
                 .andExpect(jsonPath("$.success").value(true))
                 .andExpect(jsonPath("$.errorCode").value(ErrorCode.OK.getCode()))
                 .andExpect(jsonPath("$.message").value(ErrorCode.OK.getMessage()));
+
 
     }
     @DisplayName("[API][GET] 단일 장소 조회 - 장소 있는 경우")
